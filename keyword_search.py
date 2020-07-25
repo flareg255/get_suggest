@@ -5,6 +5,7 @@ listItems = []
 def runSearch (rengeNum):
     for i in range(rengeNum):
         main()
+        print(str(i + 1) + '回目終了')
 
 def main ():
     global listItems
@@ -15,12 +16,15 @@ def main ():
 
     resultListItems = []
     for item in listItems:
+        print(item.replace( '\n', '' ))
         time.sleep(10)
-        resultListItems.extend(rqApi (item))
+        resultListItems.extend(rqApi ( item.replace( '\n', '' ) ))
 
     print(resultListItems)
 
     listItems = set(resultListItems)
+
+    print(listItems)
 
     fileWrite(filePath, listItems)
 
@@ -35,6 +39,7 @@ def keywordFileRead (path):
 
 def rqApi (rqKeyword):
     keywordList = []
+    keywordList.append(rqKeyword)
     # エンドポイント
     url = 'http://suggestqueries.google.com/complete/search?output=toolbar&hl=en&q=' + rqKeyword
     # # リクエスト
@@ -54,7 +59,6 @@ def rqApi (rqKeyword):
 
 def fileWrite (path, str):
     modeType = 'a'
-    print(str)
     # if not os.path.isfile(path):
     #     modeType = 'w'
 
@@ -63,4 +67,4 @@ def fileWrite (path, str):
 
 
 
-runSearch(10);
+runSearch(3);
