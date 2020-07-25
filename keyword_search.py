@@ -1,6 +1,10 @@
-import requests, bs4, os, pathlib
+import requests, bs4, os, pathlib, time
 
 listItems = []
+
+def runSearch (rengeNum):
+    for i in range(rengeNum):
+        main()
 
 def main ():
     global listItems
@@ -11,6 +15,7 @@ def main ():
 
     resultListItems = []
     for item in listItems:
+        time.sleep(10)
         resultListItems.extend(rqApi (item))
 
     print(resultListItems)
@@ -58,4 +63,4 @@ def fileWrite (path, str):
 
 
 
-main();
+runSearch(10);
